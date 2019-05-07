@@ -33,13 +33,11 @@ END_MESSAGE_MAP()
 // CMapToolApp 생성
 
 CMapToolApp::CMapToolApp()
+:m_bLoad(false), m_bUpDown(false), m_iObjBtn(0), m_iTerrEditBtn(0)
 {
 	// TODO: 여기에 생성 코드를 추가합니다.
 	// InitInstance에 모든 중요한 초기화 작업을 배치합니다.
-	g_bLoad =false;
-	g_bUpDown =false;
-	g_iObjBtn=0;
-	g_iTerrEditBtn=0;
+
 }
 
 
@@ -161,40 +159,40 @@ BOOL CMapToolApp::OnIdle(LONG lCount)
 
 	CWinApp::OnIdle(lCount);
 	
-	if(g_bLoad ==true){
+	if(m_bLoad ==true){
 		MYINPUT->UpdateDirectInput();
 		GAMEMGR->GameLoop();
-		GAMEMGR->g_Terrain->m_ieditMode=g_iTerrEditBtn;		
-		GAMEMGR->g_Terrain->setUpDown(g_bUpDown);
+		GAMEMGR->g_Terrain->m_ieditMode= m_iTerrEditBtn;
+		GAMEMGR->g_Terrain->setUpDown(m_bUpDown);
 	}
 
 	
 	if(KeyDown(DIK_P))
 	{
-		switch (g_iObjBtn)
+		switch (m_iObjBtn)
 		{
 		case 0:
-			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Boxes/Boxes.X",g_iObjBtn);
+			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Boxes/Boxes.X", m_iObjBtn);
 			break;
 
 		case 1:
-			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Fishing Box/Fishing.X",g_iObjBtn);
+			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Fishing Box/Fishing.X", m_iObjBtn);
 			break;
 
 		case 2:
-			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Gear Box/GearBox.X",g_iObjBtn);
+			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Gear Box/GearBox.X", m_iObjBtn);
 			break;
 
 		case 3:
-			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Post/Post.X",g_iObjBtn);
+			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Post/Post.X", m_iObjBtn);
 			break;
 
 		case 4:
-			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Tree/Tree.X",g_iObjBtn);
+			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Tree/Tree.X", m_iObjBtn);
 			break;
 
 		case 5:
-			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Tree Box/TreeBox.X",g_iObjBtn);
+			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Tree Box/TreeBox.X", m_iObjBtn);
 			break;
 
 		default:

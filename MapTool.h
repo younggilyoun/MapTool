@@ -18,12 +18,17 @@ class CMapToolApp : public CWinApp
 public:
 	CMapToolApp();
 
-public:
-	bool g_bLoad;
-	bool g_bUpDown;
+	void setLoad(bool bLoad) { m_bLoad = bLoad; }
+	void setUpDown(bool bUpDown) { m_bUpDown = bUpDown; }
+	void SetTerrEditBtn(int nTerrEditBtn) { m_iTerrEditBtn = nTerrEditBtn; }
+	void SetObjBtn(int nObjBtn) { m_iObjBtn = nObjBtn; }
+
+private:
+	bool m_bLoad;
+	bool m_bUpDown;
 	
-	int g_iObjBtn;
-	int g_iTerrEditBtn;
+	int m_iObjBtn;
+	int m_iTerrEditBtn;
 
 
 // 재정의입니다.

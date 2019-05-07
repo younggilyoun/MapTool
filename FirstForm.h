@@ -14,28 +14,22 @@ public:
 
 // 대화 상자 데이터입니다.
 	enum { IDD = IDD_DIALOG1 };
+	
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
-
-	DECLARE_MESSAGE_MAP()
-public:
-	afx_msg void OnBnClickedLoadbtn();
-public:
-	char*	_Loadmsg;
-	CString Loadmsg;
-	void	LoadTexture(int _num,float _x,float _y,float _z);
-public:
-	afx_msg void OnBnClickedSavebtn();
-public:
 	virtual BOOL OnInitDialog();
-public:
-	afx_msg void OnBnClickedTxtload();
+	DECLARE_MESSAGE_MAP()
 
-public:
+	afx_msg void OnBnClickedLoadbtn();		
+	afx_msg void OnBnClickedSavebtn();	
+	afx_msg void OnBnClickedTxtload();
 	afx_msg void OnBnClickedTerrsizebtn();
-public:
 	afx_msg void OnBnClickedObjbtn2();
-public:
-	CListBox g_ListBox;
+
+private:
+	CString m_strLoadmsg;
+	CListBox m_ListBox;
+	void	LoadTexture(int _num, float _x, float _y, float _z);
+	
 };

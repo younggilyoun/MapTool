@@ -14,8 +14,7 @@ protected:
 	virtual ~Form();
 
 public:
-	CString Loadmsg;
-	bool	m_bObjBtn;
+	
 	enum { IDD = IDD_FORM };
 #ifdef _DEBUG
 	virtual void AssertValid() const;
@@ -26,25 +25,23 @@ public:
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-
+	virtual void OnInitialUpdate();
 	DECLARE_MESSAGE_MAP()
-public:
+
 	afx_msg void OnBnClickedSavebtn();
 	afx_msg void OnBnClickedLoadbtn();
 	afx_msg void OnBnClickedTxtload();
-
-	void	LoadTexture(int _num,float _x,float _y,float _z);
-public:
 	afx_msg void OnBnClickedObjbtn();
-public:
-	afx_msg void OnLbnSelchangeList1();
-public:
-	CListBox g_ListObj;
-public:
-	virtual void OnInitialUpdate();
+	afx_msg void OnLbnSelchangeList1();	
 	afx_msg void OnBnClickedButton3();
 	afx_msg void OnBnClickedButton4();
 	afx_msg void OnBnClickedButton5();
+
+private:
+	CListBox m_ListObj;
+	CString Loadmsg;
+	bool	m_bObjBtn;
+//	void	LoadTexture(int _num, float _x, float _y, float _z);
 };
 
 

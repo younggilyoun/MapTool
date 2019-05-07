@@ -12,9 +12,9 @@
 IMPLEMENT_DYNCREATE(CFormMain, CFormView)
 
 CFormMain::CFormMain()
-	: CFormView(CFormMain::IDD)
+	: CFormView(CFormMain::IDD), m_pwndShow(NULL)
 {
-	 m_pwndShow = NULL;
+
 }
 
 CFormMain::~CFormMain()
@@ -58,10 +58,10 @@ void CFormMain::OnInitialUpdate()
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 	CString    strOne = _T("First");
 	CString    strTwo = _T("Second");
-	CString    strThree = _T("Third");
+	//CString    strThree = _T("Third");
 	m_Tab.InsertItem(1, strOne);
 	m_Tab.InsertItem(2, strTwo);
-	m_Tab.InsertItem(3, strThree);
+	//m_Tab.InsertItem(3, strThree);
 
 
 	CRect Rect;

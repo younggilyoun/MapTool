@@ -69,14 +69,14 @@ void CSecondForm::OnBnClickedButton3()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	CMapToolApp *pApp = (CMapToolApp *) AfxGetApp();
-	pApp->g_iTerrEditBtn =0;
+	pApp->SetTerrEditBtn(0);
 }
 
 void CSecondForm::OnBnClickedButton4()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	CMapToolApp *pApp = (CMapToolApp *) AfxGetApp();
-	pApp->g_iTerrEditBtn =1;
+	pApp->SetTerrEditBtn(1);
 }
 
 void CSecondForm::OnBnClickedButton5()
@@ -84,17 +84,17 @@ void CSecondForm::OnBnClickedButton5()
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	
 	CMapToolApp *pApp = (CMapToolApp *) AfxGetApp();
-	pApp->g_iTerrEditBtn =2;
+	pApp->SetTerrEditBtn(2);
 }
 
 void CSecondForm::OnBnClickedCheck1()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	CMapToolApp *pApp = (CMapToolApp *) AfxGetApp();
-	pApp->g_bUpDown = false;
+	pApp->SetObjBtn(false);
 
-	BOOL _noCheck = IsDlgButtonChecked(IDC_CHECK2);
-	if(_noCheck == true)
+	BOOL _bCheck = IsDlgButtonChecked(IDC_CHECK2);
+	if(_bCheck == true)
 		CheckDlgButton(IDC_CHECK2,false);
 }
 
@@ -103,9 +103,9 @@ void CSecondForm::OnBnClickedCheck2()
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 
 	CMapToolApp *pApp = (CMapToolApp *) AfxGetApp();
-	pApp->g_bUpDown = true;
+	pApp->SetObjBtn(true);
 
-	BOOL _yesCheck = IsDlgButtonChecked(IDC_CHECK1);
-	if(_yesCheck == true)
+	BOOL _bCheck = IsDlgButtonChecked(IDC_CHECK1);
+	if(_bCheck == true)
 		CheckDlgButton(IDC_CHECK1,false);
 }

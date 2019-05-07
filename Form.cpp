@@ -17,11 +17,10 @@
 // Form
 
 IMPLEMENT_DYNCREATE(Form, CFormView)
-Form::Form()
-	: CFormView(Form::IDD)
+Form::Form(): CFormView(Form::IDD)
+,m_bObjBtn(false)
 {
-	Loadmsg="";
-	m_bObjBtn=false;
+
 }
 
 Form::~Form()
@@ -31,7 +30,7 @@ Form::~Form()
 void Form::DoDataExchange(CDataExchange* pDX)
 {
 	CFormView::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_LIST1, g_ListObj);
+	DDX_Control(pDX, IDC_LIST1, m_ListObj);
 }
 
 BEGIN_MESSAGE_MAP(Form, CFormView)
@@ -90,7 +89,7 @@ void Form::OnBnClickedObjbtn()
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 		
 	CMapToolApp *pApp = (CMapToolApp *) AfxGetApp();
-	pApp->g_iObjBtn =g_ListObj.GetCaretIndex();
+	pApp->SetObjBtn(m_ListObj.GetCaretIndex());
 }
 
 void Form::OnLbnSelchangeList1()
@@ -108,16 +107,16 @@ void Form::OnInitialUpdate()
 	
 }
 
-void Form::LoadTexture(int _num,float _x,float _y,float _z)
-{
-	
-}
+//void Form::LoadTexture(int _num,float _x,float _y,float _z)
+//{
+//	
+//}
 void Form::OnBnClickedButton3()
 {
 	// TODO: Add your control notification handler code here
 
 	CMapToolApp *pApp = (CMapToolApp *) AfxGetApp();
-	pApp->g_iTerrEditBtn =0;
+	pApp->SetTerrEditBtn(0);
 
 }
 
@@ -125,12 +124,12 @@ void Form::OnBnClickedButton4()
 {
 	// TODO: Add your control notification handler code here
 	CMapToolApp *pApp = (CMapToolApp *) AfxGetApp();
-	pApp->g_iTerrEditBtn =1;
+	pApp->SetTerrEditBtn(1);
 }
 
 void Form::OnBnClickedButton5()
 {
 	// TODO: Add your control notification handler code here
 	CMapToolApp *pApp = (CMapToolApp *) AfxGetApp();
-	pApp->g_iTerrEditBtn =2;
+	pApp->SetTerrEditBtn(2);
 }
