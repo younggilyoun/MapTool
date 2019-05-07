@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="dx">
+      <UniqueIdentifier>{dc87e711-3f49-4730-b4d1-432f5de23da3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dx\mesh">
+      <UniqueIdentifier>{ac15d007-3e10-45b7-b433-a141d2b040be}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FirstForm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Form.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FormMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MapTool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MapToolDoc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MapToolView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondForm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Axis.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraBase.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraFPS.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraFree.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraTarget.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectMgr.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="DXCommon.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="DXinput.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="FontMgr.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeCamera.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMgr.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseRay.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadNode.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTree.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="Tri.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="WinCommon.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowsMgr.cpp">
+      <Filter>dx</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshBase.cpp">
+      <Filter>dx\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeMgr.cpp">
+      <Filter>dx\mesh</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FirstForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Form.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FormMain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MapTool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MapToolDoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MapToolView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Axis.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraBase.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraFPS.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraFree.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraTarget.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectMgr.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="DXCommon.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="DXinput.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="FontMgr.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeCamera.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMgr.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseRay.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="MySingleton.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadNode.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTree.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="Tri.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="WinCommon.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsMgr.h">
+      <Filter>dx</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshBase.h">
+      <Filter>dx\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeMgr.h">
+      <Filter>dx\mesh</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\MapTool.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\MapToolDoc.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MapTool.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\MapTool.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+</Project>
