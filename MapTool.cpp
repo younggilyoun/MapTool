@@ -162,8 +162,8 @@ BOOL CMapToolApp::OnIdle(LONG lCount)
 	if(m_bLoad ==true){
 		MYINPUT->UpdateDirectInput();
 		GAMEMGR->GameLoop();
-		GAMEMGR->g_Terrain->m_ieditMode= m_iTerrEditBtn;
-		GAMEMGR->g_Terrain->setUpDown(m_bUpDown);
+		GAMEMGR->GetTerrain()->m_ieditMode= m_iTerrEditBtn;
+		GAMEMGR->GetTerrain()->setUpDown(m_bUpDown);
 	}
 
 	
@@ -172,27 +172,27 @@ BOOL CMapToolApp::OnIdle(LONG lCount)
 		switch (m_iObjBtn)
 		{
 		case 0:
-			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Boxes/Boxes.X", m_iObjBtn);
+			TREEMGR->CreateTree(GAMEMGR->GetTerrain()->m_vMouse,"obj/Boxes/Boxes.X", m_iObjBtn);
 			break;
 
 		case 1:
-			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Fishing Box/Fishing.X", m_iObjBtn);
+			TREEMGR->CreateTree(GAMEMGR->GetTerrain()->m_vMouse,"obj/Fishing Box/Fishing.X", m_iObjBtn);
 			break;
 
 		case 2:
-			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Gear Box/GearBox.X", m_iObjBtn);
+			TREEMGR->CreateTree(GAMEMGR->GetTerrain()->m_vMouse,"obj/Gear Box/GearBox.X", m_iObjBtn);
 			break;
 
 		case 3:
-			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Post/Post.X", m_iObjBtn);
+			TREEMGR->CreateTree(GAMEMGR->GetTerrain()->m_vMouse,"obj/Post/Post.X", m_iObjBtn);
 			break;
 
 		case 4:
-			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Tree/Tree.X", m_iObjBtn);
+			TREEMGR->CreateTree(GAMEMGR->GetTerrain()->m_vMouse,"obj/Tree/Tree.X", m_iObjBtn);
 			break;
 
 		case 5:
-			TREEMGR->CreateTree(GAMEMGR->g_Terrain->m_vMouse,"obj/Tree Box/TreeBox.X", m_iObjBtn);
+			TREEMGR->CreateTree(GAMEMGR->GetTerrain()->m_vMouse,"obj/Tree Box/TreeBox.X", m_iObjBtn);
 			break;
 
 		default:

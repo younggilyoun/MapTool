@@ -3,9 +3,9 @@
 #include "Axis.h"
 
 Axis::Axis(void)
+	:m_pVB(NULL), m_pVtxs(NULL)
 {
-	m_pVB			= NULL;
-	m_pVtxs			= NULL; 
+
 }
 
 Axis::~Axis(void)

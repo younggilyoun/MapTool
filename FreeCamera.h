@@ -1,22 +1,13 @@
 #pragma once
 
-struct CamInfo
-{
-	D3DXVECTOR3		_vEye;
-	D3DXVECTOR3		_vLookAt;
-	D3DXVECTOR3		_vUp;
-};
-
 class FreeCamera
 {
-	D3DXVECTOR3			m_vEye;
-	D3DXVECTOR3			m_vLookAt;
-	D3DXVECTOR3			m_vUp;
-	D3DXVECTOR3			m_vOrgUp;
-	D3DXVECTOR3			m_vDir;
-	D3DXVECTOR3			m_vHorz;
-
-	D3DXMATRIX			m_mView;
+	struct CamInfo
+	{
+		D3DXVECTOR3		_vEye;
+		D3DXVECTOR3		_vLookAt;
+		D3DXVECTOR3		_vUp;
+	};
 
 public:
 	void SetTransView(void);
@@ -29,4 +20,15 @@ public:
 public:
 	FreeCamera(CamInfo _info);
 	virtual ~FreeCamera(void);
+
+private:
+	
+	D3DXVECTOR3			m_vEye;
+	D3DXVECTOR3			m_vLookAt;
+	D3DXVECTOR3			m_vUp;
+	D3DXVECTOR3			m_vOrgUp;
+	D3DXVECTOR3			m_vDir;
+	D3DXVECTOR3			m_vHorz;
+
+	D3DXMATRIX			m_mView;
 };

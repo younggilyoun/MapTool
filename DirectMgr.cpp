@@ -4,9 +4,9 @@
 #include "DirectMgr.h"
 
 DirectMgr::DirectMgr(void)
+:m_pD3D(NULL), m_pDevice(NULL)
 {
-	m_pD3D		= NULL;
-	m_pDevice	= NULL;
+
 }
 
 DirectMgr::~DirectMgr(void)

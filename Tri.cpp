@@ -3,7 +3,7 @@
 
 #include "Tri.h"
 
-Tri::Tri(void)
+Tree::Tree(void)
 {
 	m_iFaceCnt		= 0;
 	m_fSpeed		= 5.0f;
@@ -18,12 +18,12 @@ Tri::Tri(void)
 	D3DXMatrixIdentity(&m_mTM);
 }
 
-Tri::~Tri(void)
+Tree::~Tree(void)
 {
 	Release();
 }
 
-void Tri::Init( void )
+void Tree::Init( void )
 {
 	D3DFVF_XYZ_COLOR Vertices[] =
 	{
@@ -45,7 +45,7 @@ void Tri::Init( void )
 	m_iFaceCnt = sizeof(Vertices) / (sizeof(D3DFVF_XYZ_COLOR)*3);
 }
 
-void Tri::Update( float dTime )
+void Tree::Update( float dTime )
 {
 	D3DXVec3TransformNormal(&m_vDir, &m_vOrgDir, &m_mTM);
 
@@ -67,7 +67,7 @@ void Tri::Update( float dTime )
 	m_mTM = m_mRot * m_mTrans;
 }
 
-void Tri::Render( void )
+void Tree::Render( void )
 {
 	DEVICE->SetStreamSource(0, m_pVB, 0, sizeof(D3DFVF_XYZ_COLOR));
 	DEVICE->SetFVF(FVF_XYZ_COLOR);
@@ -80,12 +80,12 @@ void Tri::Render( void )
 	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }
 
-void Tri::Release( void )
+void Tree::Release( void )
 {
 	SAFE_RELEASE(m_pVB);
 }
 
-float Tri::MyLerp( float _sx, float _ey, float _time )
+float Tree::MyLerp( float _sx, float _ey, float _time )
 {
 	float _rx = 0.0f;
 

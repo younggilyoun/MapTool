@@ -62,7 +62,7 @@ void CSecondForm::OnBnClickedEditsizebtn()
 	CMapToolApp *pApp = (CMapToolApp *) AfxGetApp();
 	int _size = _ttoi(_str);
 
-	GAMEMGR->g_Terrain->g_fQuadSize = _size;
+	GAMEMGR->GetTerrain()->g_fQuadSize = _size;
 }
 
 void CSecondForm::OnBnClickedButton3()

@@ -13,23 +13,7 @@ enum MOUSEBUTTON_TYPE { MT_LEFT, MT_RIGHT, MT_MIDDLE, MT_MAX };
 
 class DXinput : public MySingleton<DXinput>
 {
-	HINSTANCE				m_hInstance;
-	HWND					m_hWnd;
-
-	LPDIRECTINPUT8			m_pDI;
-	LPDIRECTINPUTDEVICE8	m_pKeyBoardDevice;				// 키보드 디바이스
-	LPDIRECTINPUTDEVICE8	m_pMouseDevice;					// 마우스 디바이스
-
-	DIMOUSESTATE			m_MouseState;					// 마우스 상태
-	POINT					m_MousePoint;
-	BYTE					m_MouseKeyState[MT_MAX];
-	BYTE					m_MouseOldKeyState[MT_MAX];
-	BYTE					m_MouseNewKeyState[MT_MAX];
-
-	BYTE					m_KeyBoardState[KEYBOARDMAX];	// 키보드 상태
-	BYTE					m_OldKeyState[KEYBOARDMAX];
-	BYTE					m_NewKeyState[KEYBOARDMAX];
-
+	
 public:
 	bool IintDirectInput(HINSTANCE hInst, HWND hWnd);		// 초기화
 	void UpdateDirectInput(void);							// 업데이트
@@ -64,4 +48,22 @@ public:
 public:
 	DXinput(void);
 	virtual ~DXinput(void);
+
+private:
+	HINSTANCE				m_hInstance;
+	HWND					m_hWnd;
+
+	LPDIRECTINPUT8			m_pDI;
+	LPDIRECTINPUTDEVICE8	m_pKeyBoardDevice;				// 키보드 디바이스
+	LPDIRECTINPUTDEVICE8	m_pMouseDevice;					// 마우스 디바이스
+
+	DIMOUSESTATE			m_MouseState;					// 마우스 상태
+	POINT					m_MousePoint;
+	BYTE					m_MouseKeyState[MT_MAX];
+	BYTE					m_MouseOldKeyState[MT_MAX];
+	BYTE					m_MouseNewKeyState[MT_MAX];
+
+	BYTE					m_KeyBoardState[KEYBOARDMAX];	// 키보드 상태
+	BYTE					m_OldKeyState[KEYBOARDMAX];
+	BYTE					m_NewKeyState[KEYBOARDMAX];
 };

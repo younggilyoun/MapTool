@@ -15,10 +15,10 @@ CameraFree::~CameraFree(void)
 void CameraFree::KeyControl( float dTime )
 {
 	// 마우스
-	LONG	_x, _y, _z;
-	GetMouseRelativePt(&_x, &_y, &_z);
-	RotateX(_y * 0.003f);
-	RotateY(_x * 0.003f);
+	LONG	_nx, _ny, _nz;
+	GetMouseRelativePt(&_nx, &_ny, &_nz);
+	RotateX(_ny * 0.003f);
+	RotateY(_nx * 0.003f);
 
 	// 이동
 	static float fMove = 0.0f;

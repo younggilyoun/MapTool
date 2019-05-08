@@ -5,7 +5,7 @@
 enum CAMTYPE { CT_FREE, CT_FPS, CT_TARGET, CT_MAX };
 
 class CameraBase;
-class Tri;
+class Tree;
 class FreeCamera;
 class Camera;
 class Axis;
@@ -13,18 +13,6 @@ class Grid;
 class Terrain;
 class GameMgr : public MySingleton<GameMgr>
 {
-public:
-	Terrain*		g_Terrain;
-	CAMTYPE			m_enCamType;
-	CameraBase*		m_pCurrCamera;
-	CameraBase*		m_pCamera[CT_MAX];
-	Axis*			m_pAxis;
-	Grid*			m_pGrid;
-
-	Tri*			m_pTri;
-
-	bool			m_bDebugTextShow;
-	bool			m_bWire;
 
 public:
 	void Init(char* _name);
@@ -38,8 +26,25 @@ public:
 	void SystemUpdate(void);
 
 	CameraBase* GetCurrCamera(void) { return m_pCurrCamera; }
+	Terrain*    GetTerrain() {		return m_Terrain;	}
+	Tree*		GetTree() { return m_pTree; }
 
 public:
 	GameMgr(void);
 	virtual ~GameMgr(void);
+
+protected:
+	Terrain*		m_Terrain;
+
+private:
+	CAMTYPE			m_enCamType;
+	CameraBase*		m_pCurrCamera;
+	CameraBase*		m_pCamera[CT_MAX];
+	Axis*			m_pAxis;
+	Grid*			m_pGrid;
+
+	Tree*			m_pTree;
+
+	bool			m_bDebugTextShow;
+	bool			m_bWire;
 };

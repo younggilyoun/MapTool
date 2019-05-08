@@ -4,9 +4,9 @@
 #include "MouseRay.h"
 
 MouseRay::MouseRay(void)
+:m_vPos(D3DXVECTOR3(0, 0, 0)),
+m_vDir(D3DXVECTOR3(0, 0, 0))
 {
-	m_vPos=D3DXVECTOR3(0,0,0);
-	m_vDir=D3DXVECTOR3(0,0,0);
 }
 
 MouseRay::~MouseRay(void)

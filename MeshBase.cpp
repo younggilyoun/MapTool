@@ -5,33 +5,12 @@
 #include "MeshBase.h"
 
 MeshBase::MeshBase(void)
-{
-
-	m_pMesh=NULL;
-	m_dMtricnt=0;
-	m_pMaterials=NULL;
-	m_pTexture=NULL;
-
-	m_fSpeed	=5;
-	m_vPos		=D3DXVECTOR3(0,0,0);
-	m_vRot		=D3DXVECTOR3(D3DX_PI/2,0,0);
-	m_vScale	=D3DXVECTOR3(1,1,1);
-	m_vDir		=D3DXVECTOR3(0,0,-1);
-	m_vOrgDir	=m_vDir;
-	D3DXMatrixIdentity(&m_mTM);
-	D3DXMatrixIdentity(&m_mTrans);
-	D3DXMatrixIdentity(&m_mRot);
-	D3DXMatrixIdentity(&m_mScale);
-	D3DXMatrixIdentity(&m_mParentTM);
-	D3DXMatrixIdentity(&m_mTempTrans);
-
-
-	m_iFaceCnt = 0;
-	m_fAlpha=1;
-
-	m_iNum=-1;
-
-	m_vTempPos=NULL;
+:m_pMesh(NULL), m_pMaterials(NULL), m_pTexture(NULL), m_pvTempPos(NULL),
+m_dMtricnt(0), m_fSpeed(5.0), m_iFaceCnt(0), m_fAlpha(1.0), m_iNum(1),
+m_vPos(D3DXVECTOR3(0, 0, 0)), m_vRot(D3DXVECTOR3(D3DX_PI / 2, 0, 0)), m_vScale(D3DXVECTOR3(1, 1, 1)), m_vDir(D3DXVECTOR3(0, 0, -1)),
+m_vOrgDir(m_vDir)
+{		
+	
 }
 
 MeshBase::~MeshBase(void)
@@ -42,11 +21,18 @@ MeshBase::~MeshBase(void)
 
 void MeshBase::init(char* name)
 {
-	char Dir[256]		= "";
-	char MeshPaht[256]	= "";
-	char MeshName[256]	= "";
+	D3DXMatrixIdentity(&m_mTM);
+	D3DXMatrixIdentity(&m_mTrans);
+	D3DXMatrixIdentity(&m_mRot);
+	D3DXMatrixIdentity(&m_mScale);
+	D3DXMatrixIdentity(&m_mParentTM);
+	D3DXMatrixIdentity(&m_mTempTrans);
 
-	PathDivision(name, MeshPaht, MeshName);
+	char chDir[256]		= "";
+	char chMeshPath[256]	= "";
+	char chMeshName[256]	= "";
+
+	PathDivision(name, chMeshPath, chMeshName);
 
 	LPD3DXBUFFER pMtrlBuffer = NULL;
 	char		 szDebugString[256] = {0,};
@@ -59,8 +45,8 @@ void MeshBase::init(char* name)
 		return;
 	}
 
-	GetCurrentDirectory(256, Dir);
-	SetCurrentDirectory(MeshPaht);
+	GetCurrentDirectory(256, chDir);
+	SetCurrentDirectory(chMeshPath);
 	//Material วาด็
 	m_pMaterials = new D3DMATERIAL9[m_dMtricnt];
 	m_pTexture = new LPDIRECT3DTEXTURE9[m_dMtricnt];
@@ -88,7 +74,7 @@ void MeshBase::init(char* name)
 			}
 		}
 	}	
-	SetCurrentDirectory(Dir);
+	SetCurrentDirectory(chDir);
 }
 
 void MeshBase::Update( float dTime )
@@ -102,17 +88,17 @@ void MeshBase::Update( float dTime )
 	temp.y = m_mTM._42;
 	temp.z = m_mTM._43;
 
-	m_vPos.y = GAMEMGR->g_Terrain->GetPlayerHeight(temp);	
+	m_vPos.y = GAMEMGR->GetTerrain()->GetPlayerHeight(temp);
 	D3DXMatrixTranslation(&m_mTrans, m_vPos.x,m_vPos.y,m_vPos.z);
 	D3DXMatrixRotationYawPitchRoll(&m_mRot,m_vRot.y,m_vRot.x,m_vRot.z);
 	D3DXMatrixScaling(&m_mScale,m_vScale.x,m_vScale.y,m_vScale.z);
 	D3DXVec3TransformNormal(&m_vDir,&m_vOrgDir,&m_mRot);
 
 	m_mTM = m_mScale* m_mRot * m_mTrans * m_mParentTM;
-	if(m_vTempPos != NULL)
+	if(m_pvTempPos != NULL)
 	{
 		D3DXMATRIX temp;
-		D3DXMatrixTranslation(&temp,m_vTempPos->x,m_vTempPos->y,m_vTempPos->z);
+		D3DXMatrixTranslation(&temp, m_pvTempPos->x, m_pvTempPos->y, m_pvTempPos->z);
 
 		m_mTM = m_mTM*temp;
 	}

@@ -4,13 +4,8 @@
 #include "FreeCamera.h"
 
 FreeCamera::FreeCamera(CamInfo _info)
+:m_vEye(_info._vEye), m_vLookAt(_info._vLookAt), m_vUp(_info._vUp), m_vOrgUp(m_vUp)
 {
-	m_vEye		= _info._vEye;
-	m_vLookAt	= _info._vLookAt;
-	m_vUp		= _info._vUp;
-
-	m_vOrgUp	= m_vUp;
-
 	SetCamVectors();
 }
 
@@ -67,10 +62,10 @@ void FreeCamera::KeyControl( float dTime )
 	}
 
 	// ¸¶¿ì½º
-	LONG	_x, _y, _z;
-	GetMouseRelativePt(&_x, &_y, &_z);
-	RotateX(_y * 0.003f);
-	RotateY(_x * 0.003f);
+	LONG	_nx, _ny, _nz;
+	GetMouseRelativePt(&_nx, &_ny, &_nz);
+	RotateX(_ny * 0.003f);
+	RotateY(_nx * 0.003f);
 }
 
 void FreeCamera::SetCamVectors( void )

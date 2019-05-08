@@ -4,10 +4,8 @@
 
 
 DXinput::DXinput(void)
+:m_pDI(NULL), m_pKeyBoardDevice(NULL), m_pMouseDevice(NULL)
 {
-	m_pDI				= NULL;
-	m_pKeyBoardDevice	= NULL;
-	m_pMouseDevice		= NULL;
 
 	memset(m_MouseKeyState, 0, MT_MAX);
 	memset(m_MouseOldKeyState, 0, MT_MAX);

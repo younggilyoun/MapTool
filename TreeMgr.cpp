@@ -19,7 +19,7 @@ void TreeMgr::CreateTree( D3DXVECTOR3 _vPos ,char* _filename, int _num)
 {
 	MeshBase* pTree = new MeshBase;
 	pTree->init(_filename);
-	pTree->m_iNum = _num;
+	pTree->SetNum(_num);
 	pTree->SetPos(D3DXVECTOR3(_vPos));
 	m_listTrees.push_back(pTree);
 }       

@@ -19,21 +19,17 @@
 
 
 GameMgr::GameMgr(void)
+:m_pCurrCamera(NULL), 
+m_pAxis(NULL), 
+m_pGrid(NULL),
+m_pTree(NULL),
+m_bDebugTextShow(true),
+m_bWire(false),
+m_enCamType(CT_FPS),
+m_Terrain(NULL)
 {
-	m_pCurrCamera	= NULL;
-
 	for( int i = 0; i < CT_MAX; ++i )
-		m_pCamera[i] = NULL;
-
-	m_pAxis			= NULL;
-	m_pGrid			= NULL;
-	m_pTri			= NULL;
-
-	m_bDebugTextShow	= true;
-	m_bWire				= false;
-
-	m_enCamType		= CT_FPS;
-	g_Terrain		= NULL;
+		m_pCamera[i] = NULL;	
 }
 
 GameMgr::~GameMgr(void)
@@ -44,12 +40,12 @@ GameMgr::~GameMgr(void)
 void GameMgr::Init(char* _name)
 {
 
-	g_Terrain = new Terrain;
-	g_Terrain->Init(128,_name);
+	m_Terrain = new Terrain;
+	m_Terrain->Init(128,_name);
 
 	// TRI
-	m_pTri = new Tri;
-	m_pTri->Init();
+	m_pTree = new Tree;
+	m_pTree->Init();
 
 	// 카메라 //
 
@@ -75,7 +71,7 @@ void GameMgr::Init(char* _name)
 	m_pCamera[CT_TARGET] = new CameraTarget(_info);
 	
 	CameraTarget* pTarget = (CameraTarget*)m_pCamera[CT_TARGET];
-	pTarget->m_pTarget = m_pTri;
+	pTarget->m_pTarget = m_pTree;
 
 
 	m_pCurrCamera = m_pCamera[m_enCamType];
@@ -110,9 +106,9 @@ void GameMgr::Init(char* _name)
 void GameMgr::Update( float dTime )
 {	
 	m_pAxis->Update();
-	m_pTri->Update(dTime);
+	m_pTree->Update(dTime);
 	TREEMGR->Update(dTime);
-	g_Terrain->Update(dTime);
+	m_Terrain->Update(dTime);
 	//m_pCamera->UpdateCamera(dTime);
 	//m_pCamera->KeyControl(dTime);
 	m_pCurrCamera->Update(dTime);
@@ -125,8 +121,8 @@ void GameMgr::Render( void )
 
 	// 대괄호 안에 객체 그리기
 	{
-		g_Terrain->Render();
-		m_pTri->Render();
+		m_Terrain->Render();
+		m_pTree->Render();
 
 		m_pGrid->Render_Grid();
 		m_pAxis->Render( WINDOWMGR->GetWidth(), WINDOWMGR->GetHeight());
@@ -153,7 +149,7 @@ void GameMgr::GameLoop( void )
 
 void GameMgr::Release( void )
 {
-	SAFE_DELETE(m_pTri);
+	SAFE_DELETE(m_pTree);
 
 	SAFE_DELETE(m_pGrid);
 	//SAFE_DELETE(m_pCamera);
@@ -162,7 +158,7 @@ void GameMgr::Release( void )
 	for( int i = 0; i < CT_MAX;  ++i)
 		SAFE_DELETE(m_pCamera[i]);
 
-	SAFE_DELETE(g_Terrain);
+	SAFE_DELETE(m_Terrain);
 }
 
 void GameMgr::DebugText( void )

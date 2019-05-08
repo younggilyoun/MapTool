@@ -200,7 +200,7 @@ void Terrain::Update( float dTime )
 			{
 				m_vMouse = m_pTerrainVB[iPos].vPos;
 
-				GAMEMGR->m_pTri->m_vPos = m_vMouse;
+				GAMEMGR->GetTree()->m_vPos = m_vMouse;
 			}			
 		}
 	}
@@ -377,13 +377,13 @@ bool Terrain::Collison(D3DXVECTOR3 _vPos)
 	float vSphereRadius = 1;
 
 	//1. 레이부터 타겟까지 벡터
-	D3DXVECTOR3 vRay_Target  = _vPos - ray.m_vPos;
+	D3DXVECTOR3 vRay_Target  = _vPos - ray.GetPos();
 
 	//2. 레이와 타겟벡터의 직교길이
-	float fRayDirLen  = D3DXVec3Dot(&vRay_Target,&ray.m_vDir);
+	float fRayDirLen  = D3DXVec3Dot(&vRay_Target,&ray.GetDir());
 
 	//3. 직교하는 벡터
-	D3DXVECTOR3 vRayResultPos = ray.m_vPos +(ray.m_vDir*fRayDirLen);
+	D3DXVECTOR3 vRayResultPos = ray.GetPos() +(ray.GetDir()*fRayDirLen);
 
 	//4. 직교벡터와 타겟과의 거리
 	float fResultLen  = D3DXVec3Length(&(_vPos-vRayResultPos));
@@ -533,9 +533,9 @@ void Terrain::UpdateAlphaTexture(void)
 			D3DXVECTOR3 v2 = m_pTerrainVB[_2].vPos;
 
 			if( D3DXIntersectTri(&v0, &v1, &v2, 
-				&_ray.m_vPos, &_ray.m_vDir, NULL, NULL, &iDist))
+				&_ray.GetPos(), &_ray.GetDir(), NULL, NULL, &iDist))
 			{
-				vTargetPos = _ray.m_vPos + _ray.m_vDir * iDist;
+				vTargetPos = _ray.GetPos() + _ray.GetDir() * iDist;
 				break;
 			}
 		}

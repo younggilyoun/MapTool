@@ -1,6 +1,6 @@
 #pragma once
 
-class Tri
+class Tree
 {
 public:
 	LPDIRECT3DVERTEXBUFFER9		m_pVB;
@@ -25,6 +25,6 @@ public:
 	float MyLerp(float _sx, float _ey, float _time);
 
 public:
-	Tri(void);
-	virtual ~Tri(void);
+	Tree(void);
+	virtual ~Tree(void);
 };

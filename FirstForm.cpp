@@ -85,16 +85,16 @@ void CFirstForm::OnBnClickedSavebtn()
 		CString strValue;
 		file.Write(m_strLoadmsg, m_strLoadmsg.GetLength());
 
-		for( int j = 0; j < GAMEMGR->g_Terrain->m_iVertexCnt; j++ )
+		for( int j = 0; j < GAMEMGR->GetTerrain()->m_iVertexCnt; j++ )
 		{
-			for( int i = 0; i < GAMEMGR->g_Terrain->m_iVertexCnt; i++ )
+			for( int i = 0; i < GAMEMGR->GetTerrain()->m_iVertexCnt; i++ )
 			{
-				int iPos = j *  GAMEMGR->g_Terrain->m_iVertexCnt + i;
+				int iPos = j *  GAMEMGR->GetTerrain()->m_iVertexCnt + i;
 				float fx,fy, fz;
 
-				fx = GAMEMGR->g_Terrain->m_pTerrainVB[iPos].vPos.x;
-				fy = GAMEMGR->g_Terrain->m_pTerrainVB[iPos].vPos.y;
-				fz = GAMEMGR->g_Terrain->m_pTerrainVB[iPos].vPos.z;
+				fx = GAMEMGR->GetTerrain()->m_pTerrainVB[iPos].vPos.x;
+				fy = GAMEMGR->GetTerrain()->m_pTerrainVB[iPos].vPos.y;
+				fz = GAMEMGR->GetTerrain()->m_pTerrainVB[iPos].vPos.z;
 
 				strValue ="\r\n";
 				file.Write(strValue, strValue.GetLength());
@@ -121,15 +121,15 @@ void CFirstForm::OnBnClickedSavebtn()
 
 			float _fx,_fy,_fz;
 
-			_fx = pTree->m_vPos.x;
-			_fy = pTree->m_vPos.y;
-			_fz = pTree->m_vPos.z;
+			_fx = pTree->GetPos().x;
+			_fy = pTree->GetPos().y;
+			_fz = pTree->GetPos().z;
 
 			CString strValue;
 			strValue ="\r\n";
 			file.Write(strValue, strValue.GetLength());
 
-			strValue.Format(_T("%5d "), pTree->m_iNum);
+			strValue.Format(_T("%5d "), pTree->GetNum());
 			file.Write(strValue, strValue.GetLength());
 
 			strValue.Format(_T("%5f "), _fx);
@@ -166,25 +166,25 @@ void CFirstForm::OnBnClickedTxtload()
 
 		//ÁÂÇ¥ºÎ¸£±â
 
-		for( int j = 0; j < GAMEMGR->g_Terrain->m_iVertexCnt; j++ )
+		for( int j = 0; j < GAMEMGR->GetTerrain()->m_iVertexCnt; j++ )
 		{
-			for( int i = 0; i < GAMEMGR->g_Terrain->m_iVertexCnt; i++ )
+			for( int i = 0; i < GAMEMGR->GetTerrain()->m_iVertexCnt; i++ )
 			{
-				int iPos = j *  GAMEMGR->g_Terrain->m_iVertexCnt + i;
+				int iPos = j *  GAMEMGR->GetTerrain()->m_iVertexCnt + i;
 				float _fx,_fy,_fz;
 				CString _strx,_stry,_strz;
 				fscanf(p," %s",_strx);
 				_fx = _ttoi(_strx);
-				GAMEMGR->g_Terrain->m_pTerrainVB[iPos].vPos.x = _fx;
+				GAMEMGR->GetTerrain()->m_pTerrainVB[iPos].vPos.x = _fx;
 				fscanf(p," %s",_stry);
 				_fy = _ttoi(_stry);
-				GAMEMGR->g_Terrain->m_pTerrainVB[iPos].vPos.y = _fy;
+				GAMEMGR->GetTerrain()->m_pTerrainVB[iPos].vPos.y = _fy;
 				fscanf(p," %s",_strz);
 				_fz = _ttoi(_strz);
-				GAMEMGR->g_Terrain->m_pTerrainVB[iPos].vPos.z = _fz;
+				GAMEMGR->GetTerrain()->m_pTerrainVB[iPos].vPos.z = _fz;
 			}
 		}
-		GAMEMGR->g_Terrain->LockVB();
+		GAMEMGR->GetTerrain()->LockVB();
 
 		CString _strSize,_strNum,_strx,_stry,_strz;
 
@@ -259,7 +259,7 @@ void CFirstForm::OnBnClickedTerrsizebtn()
 	CMapToolApp *pApp = (CMapToolApp *) AfxGetApp();
 	int nSize = _ttoi(_str);
 
-	GAMEMGR->g_Terrain->Init(nSize, (char*)((LPCSTR)m_strLoadmsg));
+	GAMEMGR->GetTerrain()->Init(nSize, (char*)((LPCSTR)m_strLoadmsg));
 }
 
 void CFirstForm::OnBnClickedObjbtn2()

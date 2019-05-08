@@ -1,11 +1,11 @@
 #pragma once
 
 
-class Tri;
+class Tree;
 class CameraTarget : public CameraBase
 {
 public:
-	Tri*		m_pTarget;
+	Tree*		m_pTarget;
 
 public:
 	void KeyControl(float dTime);

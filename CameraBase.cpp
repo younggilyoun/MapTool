@@ -4,18 +4,11 @@
 #include "CameraBase.h"
 
 CameraBase::CameraBase(CameraInfo _info)
+:m_vEye(_info._vEye), m_vLookAt(_info._vLookAt),
+m_vUp(_info._vUp), m_vOrgUp(m_vUp), m_vOrgEye(m_vEye),
+m_vOrgLookAt(m_vLookAt)
 {
 	strcpy(m_strName, _info._strName);
-
-	m_vEye		= _info._vEye;
-	m_vLookAt	= _info._vLookAt;
-	m_vUp		= _info._vUp;
-
-	m_vOrgUp	= m_vUp;
-
-	m_vOrgEye	= m_vEye;
-	m_vOrgLookAt= m_vLookAt;
-
 	SetCamVectors();
 	SetTransView();
 	SetTransProj();

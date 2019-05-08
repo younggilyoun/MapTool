@@ -4,8 +4,8 @@
 #include "FontMgr.h"
 
 FontMgr::FontMgr(void)
+:m_pFont(NULL)
 {
-	m_pFont		= NULL;
 }
 
 FontMgr::~FontMgr(void)

@@ -3,10 +3,10 @@
 #include "Grid.h"
 
 Grid::Grid(void)
+:m_iLineCount(0),
+m_pVB(NULL),
+m_pVertex(NULL)
 {
-	m_iLineCount	= 0;
-	m_pVB			= NULL;
-	m_pVertex		= NULL;
 }
 
 Grid::~Grid(void)
