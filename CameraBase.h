@@ -19,10 +19,6 @@ protected:
 	D3DXVECTOR3			m_vOrgUp;
 	D3DXVECTOR3			m_vDir;
 	D3DXVECTOR3			m_vHorz;
-
-	
-
-public:
 	D3DXMATRIX			m_mView;
 	char				m_strName[256];
 
@@ -38,7 +34,8 @@ public:
 	virtual void MoveX(float _move);
 	virtual void MoveY(float _move);
 	virtual void MoveZ(float _move);
-
+	char*		GetName() { return m_strName; }
+	D3DXMATRIX  GetView() { return m_mView;}
 public:
 	CameraBase(CameraInfo _info);
 	virtual ~CameraBase(void);

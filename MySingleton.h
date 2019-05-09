@@ -8,9 +8,9 @@
 template <typename T>
 class MySingleton
 {
-public:
+private:
 	static T*	m_pInstance;
-
+protected:
 	MySingleton(void) { assert(!m_pInstance); };
 	virtual ~MySingleton(void) {}
 

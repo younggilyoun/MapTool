@@ -60,9 +60,9 @@ void CSecondForm::OnBnClickedEditsizebtn()
 	GetDlgItemText(TERRSIZEEDIT,_str);
 
 	CMapToolApp *pApp = (CMapToolApp *) AfxGetApp();
-	int _size = _ttoi(_str);
+	float _fsize = _ttof(_str);
 
-	GAMEMGR->GetTerrain()->g_fQuadSize = _size;
+	GAMEMGR->GetTerrain()->SetQuadSize(_fsize);
 }
 
 void CSecondForm::OnBnClickedButton3()

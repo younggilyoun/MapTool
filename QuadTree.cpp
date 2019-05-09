@@ -19,7 +19,7 @@ void QuadTree::QuadCreate( D3DFVF_XYZ_NORMAL_TEX1* _pTerrainVertex, int _level, 
 
 	m_pTop = new QuadNode(m_iVertexCnt);
 
-	m_pTop->CreateNode(_pTerrainVertex,m_pTop->m_iCorner,m_iMaxLevel,0,NULL,m_iVertexCnt);
+	m_pTop->CreateNode(_pTerrainVertex,m_pTop->GetCorner(),m_iMaxLevel,0,NULL,m_iVertexCnt);
 	m_pTop->CreateChild();
 }
 

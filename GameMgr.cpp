@@ -168,12 +168,13 @@ void GameMgr::DebugText( void )
 	int x = 1;
 	int y = 30;
 	
-	FONTMGR->DrawText(x, y, D3DXCOLOR(1,0,0,1), "PAGEUP키 : 지형올리기");
-	FONTMGR->DrawText(x, y+=14, D3DXCOLOR(1,0,0,1), "CamType : %s", 
-									m_pCurrCamera->m_strName);
-
-	//FONTMGR->DrawText(x, y+=14, D3DXCOLOR(0,0,1,1), "%f %f",d);
-	FONTMGR->DrawText(x, y+=14, D3DXCOLOR(0,0,1,1), "- 와이어모드(F2키) : %s", m_bWire ? "ON" : "OFF");
+	FONTMGR->DrawText(x, y, D3DXCOLOR(0, 0, 1, 1), "F1키 : 툴팁 끄기");
+	FONTMGR->DrawText(x, y += 20, D3DXCOLOR(0, 0, 1, 1), "PAGEUP키 : 지형올리기");
+	FONTMGR->DrawText(x, y += 20, D3DXCOLOR(0, 0, 1, 1), "PAGEDown키 : 지형내리기");
+	FONTMGR->DrawText(x, y+=20, D3DXCOLOR(0, 0, 1, 1), "CamType : %s", m_pCurrCamera->GetName());
+	FONTMGR->DrawText(x, y+=20, D3DXCOLOR(0,0,1,1), "- 와이어모드(F2키) : %s", m_bWire ? "ON" : "OFF");
+	FONTMGR->DrawText(x, y += 20, D3DXCOLOR(0, 0, 1, 1), "P키 : 지형물 놓기");
+	FONTMGR->DrawText(x, y += 20, D3DXCOLOR(0, 0, 1, 1), "P키 : 지형물 놓기");
 }
 
 float GameMgr::GetDeltaTime( void )

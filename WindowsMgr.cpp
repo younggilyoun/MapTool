@@ -6,10 +6,9 @@
 LRESULT CALLBACK MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 WindowsMgr::WindowsMgr(void)
+:m_hWnd(NULL), m_iHeight(0), m_iWidth(0)
 {
-	m_hWnd		= NULL;
-	m_iHeight	= 0;
-	m_iWidth	= 0;
+
 }
 
 WindowsMgr::~WindowsMgr(void)

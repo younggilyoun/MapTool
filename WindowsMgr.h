@@ -4,11 +4,6 @@
 
 class WindowsMgr : public MySingleton<WindowsMgr>
 {
-	HWND			m_hWnd;
-	HWND			m_ViewhWnd;
-	int				m_iWidth;
-	int				m_iHeight;
-
 public:
 	void Init(int w, int h);
 	void Loop(void);
@@ -29,4 +24,9 @@ public:
 public:
 	WindowsMgr(void);
 	virtual ~WindowsMgr(void);
+private:
+	HWND			m_hWnd;
+	HWND			m_ViewhWnd;
+	int				m_iWidth;
+	int				m_iHeight;
 };

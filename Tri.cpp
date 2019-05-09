@@ -4,17 +4,14 @@
 #include "Tri.h"
 
 Tree::Tree(void)
-{
-	m_iFaceCnt		= 0;
-	m_fSpeed		= 5.0f;
-
-	m_pVB			= NULL;
-
-	m_vPos			= D3DXVECTOR3(0,0,0);
-	m_vRot			= D3DXVECTOR3(0,0,0);
-	m_vDir			= D3DXVECTOR3(0,0,1);
-	m_vOrgDir		= m_vDir;
-
+:m_iFaceCnt(0),
+m_fSpeed(5.0f),
+m_pVB(NULL),
+m_vPos(D3DXVECTOR3(0, 0, 0)),
+m_vRot(D3DXVECTOR3(0, 0, 0)),
+m_vDir(D3DXVECTOR3(0, 0, 1)),
+m_vOrgDir(m_vDir)
+{	
 	D3DXMatrixIdentity(&m_mTM);
 }
 
@@ -49,10 +46,10 @@ void Tree::Update( float dTime )
 {
 	D3DXVec3TransformNormal(&m_vDir, &m_vOrgDir, &m_mTM);
 
- 	if( KeyDown(DIK_UP) )
- 		m_vPos += m_vDir * m_fSpeed * dTime;
- 	if( KeyDown(DIK_DOWN) )
- 		m_vPos -= m_vDir * m_fSpeed * dTime;
+	if( KeyDown(DIK_UP) )
+		m_vPos += m_vDir * m_fSpeed * dTime;
+	if( KeyDown(DIK_DOWN) )
+		m_vPos -= m_vDir * m_fSpeed * dTime;
 
 	if( KeyDown(DIK_LEFT) )
 		m_vRot.y -= D3DX_PI * dTime;

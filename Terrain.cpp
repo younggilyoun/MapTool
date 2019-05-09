@@ -7,66 +7,29 @@
 #include "Tri.h"
 #include "Terrain.h"
 
-void Terrain::SetQTIndex(QuadNode* pNode, QTINFO& data){
-
-	//1. 2차원 형식의 인덱스 x y 위치
-	int iStartidxX = pNode->m_iCorner[QT_LT]%(data.iPatchCnt+1);
-	int iStartidxY = pNode->m_iCorner[QT_LT]/(data.iPatchCnt+1);
-
-	//2. 인덱스 너비
-	int iQuadInterval = pNode->m_iCorner[QT_RT] - pNode->m_iCorner[QT_LT];
-
-	//3. 1차원의 인덱스버퍼의 시작위치
-	int iStartidx = (iStartidxY*data.iPatchCnt*2)+(iStartidxX*2);
-
-	//4. 쿼드 인덱스 버퍼 셋팅
-	int idx = *(data.piQTTotalFaceCnt);
-	for(int j=0; j<iQuadInterval; ++j){
-		for(int i=0; i<iQuadInterval*2; ++i)
-		{
-			data.pQTTerrainIB[idx] = data.pTerrainIB[iStartidx+i];
-			idx++;
-		}
-		iStartidx += data.iPatchCnt*2;
-	}
-	*data.piQTTotalFaceCnt = idx;
-}
-
-
-
 Terrain::Terrain(void)
+:m_TerrUpDown(1),
+m_iPatchCnt(0),
+m_iVertexCnt(0),
+m_iTotalVertexCnt(0),
+m_iTotalFaceCnt(0),
+m_pVB(NULL),
+m_pIB(NULL),
+m_pTexture(NULL),
+m_pTerrainVB(NULL),
+m_pTerrainIB(NULL),
+m_pQuadTree(0),
+m_iQTTotalFaceCnt(0),
+m_pQTIB(NULL),
+m_pQTTerrainIB(NULL),
+m_iCircleCnt(0),
+m_vMouse(D3DXVECTOR3(0, 0, 0)),
+m_ieditMode(0),
+m_pSplatTexture(NULL),
+m_pAlphaTexture(NULL),
+m_iAlphaSize(256),
+m_fQuadSize(10)
 {
-	g_TerrUpDown		=1;
-	m_iPatchCnt			= 0;
-	m_iVertexCnt		= 0;
-	m_iTotalVertexCnt	= 0;
-	m_iTotalFaceCnt		= 0;
-
-	m_pVB				= NULL;
-	m_pIB				= NULL;
-	m_pTexture			= NULL;
-
-	m_pTerrainVB		= NULL;
-	m_pTerrainIB		= NULL;
-
-	m_pQuadTree			=0;
-	m_iQTTotalFaceCnt	=0;
-	m_pQTIB				=NULL;
-	m_pQTTerrainIB		=NULL;
-
-	m_iCircleCnt		=0;
-
-	m_vMouse	=	D3DXVECTOR3(0,0,0);
-
-
-	m_ieditMode =0;
-
-	m_pSplatTexture		= NULL;
-	m_pAlphaTexture		= NULL;
-	m_iAlphaSize		= 256;
-
-	g_fQuadSize=10;
-
 }
 
 Terrain::~Terrain(void)
@@ -186,7 +149,9 @@ void Terrain::Update( float dTime )
 	QuadCulling(m_vMouse);
 
 	if(KeyDown(DIK_PGUP))
-		TerrainUp(dTime);
+		TerrainUpDown(dTime,true);
+	else if(KeyDown(DIK_PGDN))
+		TerrainUpDown(dTime, false);
 
 	UpdateCircle();
 
@@ -200,7 +165,7 @@ void Terrain::Update( float dTime )
 			{
 				m_vMouse = m_pTerrainVB[iPos].vPos;
 
-				GAMEMGR->GetTree()->m_vPos = m_vMouse;
+				GAMEMGR->GetTree()->SetPos(m_vMouse);
 			}			
 		}
 	}
@@ -261,7 +226,7 @@ void Terrain::QuadCulling( D3DXVECTOR3 _vPos )
 	ZeroMemory(m_pQTTerrainIB, sizeof(m_pQTTerrainIB)*m_iTotalFaceCnt);
 	m_iQTTotalFaceCnt = 0;
 
-	m_pQuadTree->FindQuadNode(_vPos,m_pInfo,&Terrain::SetQTIndex,g_fQuadSize);
+	m_pQuadTree->FindQuadNode(_vPos,m_pInfo,&Terrain::SetQTIndex,m_fQuadSize);
 
 	void* pBuff = NULL;
 
@@ -270,7 +235,7 @@ void Terrain::QuadCulling( D3DXVECTOR3 _vPos )
 	m_pQTIB->Unlock();
 }
 
-void Terrain::TerrainUp( float dTime )
+void Terrain::TerrainUpDown( float dTime, bool bUP)
 {
 	set<int> setIndex;
 
@@ -285,26 +250,26 @@ void Terrain::TerrainUp( float dTime )
 		setIndex.insert(_2);
 	}
 
-	for(set<int>::iterator itor = setIndex.begin(); itor != setIndex.end(); ++itor)
+	for(auto nIndex : setIndex)
 	{
-		int idx = *(itor);
-		
-		float _x,_z, _len ,_invlen;
+		float _fx = 0.0,_fz = 0.0, _flen = 0.0,_finvlen = 0.0;
 
 		if(m_ieditMode==0)
-			_invlen =1;
+			_finvlen =1;
 		if(m_ieditMode==1){
-			_invlen= 11;
+			_finvlen= 11;
 
-			_x = m_pTerrainVB[idx].vPos.x - m_vMouse.x;
-			_z = m_pTerrainVB[idx].vPos.z - m_vMouse.z;
+			_fx = m_pTerrainVB[nIndex].vPos.x - m_vMouse.x;
+			_fz = m_pTerrainVB[nIndex].vPos.z - m_vMouse.z;
 			
-			_len = sqrt(_x*_x + _z*_z);
+			_flen = sqrt(_fx*_fx + _fz*_fz);
 			
-			_invlen-=_len/2;
+			_finvlen-=_flen/2;
 		}
-		m_pTerrainVB[idx].vPos += D3DXVECTOR3(0,_invlen,0)*dTime*g_TerrUpDown;
-
+		if(bUP)
+			m_pTerrainVB[nIndex].vPos += D3DXVECTOR3(0,_finvlen,0)*dTime*m_TerrUpDown;
+		else
+			m_pTerrainVB[nIndex].vPos -= D3DXVECTOR3(0, _finvlen, 0)*dTime*m_TerrUpDown;
 	}
 
 	void* pBuff = NULL;
@@ -329,8 +294,8 @@ void Terrain::UpdateCircle( void )
 	
 	for(int i=0; i<m_iCircleCnt;i++)
 	{
-		pBuff[i].vPos.x = g_fQuadSize*cos(i*D3DX_PI*8/180) + m_vMouse.x;
-		pBuff[i].vPos.z = g_fQuadSize*sin(i*D3DX_PI*8/180) + m_vMouse.z;
+		pBuff[i].vPos.x = m_fQuadSize*cos(i*D3DX_PI*8/180) + m_vMouse.x;
+		pBuff[i].vPos.z = m_fQuadSize*sin(i*D3DX_PI*8/180) + m_vMouse.z;
 		pBuff[i].vPos.y = 0;
 		pBuff[i].color  = D3DXCOLOR(1,1,0,1);
 	}	
@@ -517,7 +482,7 @@ void Terrain::UpdateAlphaTexture(void)
 		_ray.RayCreate(pt.x, pt.y);
 
 		D3DXMATRIX m;
-		D3DXMatrixInverse(&m, 0, &((GAMEMGR->GetCurrCamera()->m_mView)));
+		D3DXMatrixInverse(&m, 0, &((GAMEMGR->GetCurrCamera()->GetView())));
 		_ray.RayTransform(&m);
 
 		float iDist = 0;
@@ -613,7 +578,33 @@ void Terrain::UpdateAlphaTexture(void)
 void Terrain::setUpDown( bool _TerrUpDown )
 {	
 	if(_TerrUpDown)
-		g_TerrUpDown = -1;
+		m_TerrUpDown = -1;
 	else
-		g_TerrUpDown = 1;
+		m_TerrUpDown = 1;
+}
+
+
+void Terrain::SetQTIndex(QuadNode* pNode, QTINFO& data) {
+
+	//1. 2차원 형식의 인덱스 x y 위치
+	int iStartidxX = pNode->GetCorner(QT_LT) % (data.iPatchCnt + 1);
+	int iStartidxY = pNode->GetCorner(QT_LT) / (data.iPatchCnt + 1);
+
+	//2. 인덱스 너비
+	int iQuadInterval = pNode->GetCorner(QT_RT) - pNode->GetCorner(QT_LT);
+
+	//3. 1차원의 인덱스버퍼의 시작위치
+	int iStartidx = (iStartidxY*data.iPatchCnt * 2) + (iStartidxX * 2);
+
+	//4. 쿼드 인덱스 버퍼 셋팅
+	int idx = *(data.piQTTotalFaceCnt);
+	for (int j = 0; j < iQuadInterval; ++j) {
+		for (int i = 0; i < iQuadInterval * 2; ++i)
+		{
+			data.pQTTerrainIB[idx] = data.pTerrainIB[iStartidx + i];
+			idx++;
+		}
+		iStartidx += data.iPatchCnt * 2;
+	}
+	*data.piQTTotalFaceCnt = idx;
 }

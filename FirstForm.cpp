@@ -85,16 +85,17 @@ void CFirstForm::OnBnClickedSavebtn()
 		CString strValue;
 		file.Write(m_strLoadmsg, m_strLoadmsg.GetLength());
 
-		for( int j = 0; j < GAMEMGR->GetTerrain()->m_iVertexCnt; j++ )
+		for( int j = 0; j < GAMEMGR->GetTerrain()->GetVertexCnt(); j++ )
 		{
-			for( int i = 0; i < GAMEMGR->GetTerrain()->m_iVertexCnt; i++ )
+			for( int i = 0; i < GAMEMGR->GetTerrain()->GetVertexCnt(); i++ )
 			{
-				int iPos = j *  GAMEMGR->GetTerrain()->m_iVertexCnt + i;
+				int iPos = j *  GAMEMGR->GetTerrain()->GetVertexCnt() + i;
 				float fx,fy, fz;
+				const auto pTerrainVB = GAMEMGR->GetTerrain()->GetTerrainVB();
 
-				fx = GAMEMGR->GetTerrain()->m_pTerrainVB[iPos].vPos.x;
-				fy = GAMEMGR->GetTerrain()->m_pTerrainVB[iPos].vPos.y;
-				fz = GAMEMGR->GetTerrain()->m_pTerrainVB[iPos].vPos.z;
+				fx = pTerrainVB[iPos].vPos.x;
+				fy = pTerrainVB[iPos].vPos.y;
+				fz = pTerrainVB[iPos].vPos.z;
 
 				strValue ="\r\n";
 				file.Write(strValue, strValue.GetLength());
@@ -166,22 +167,24 @@ void CFirstForm::OnBnClickedTxtload()
 
 		//ÁÂÇ¥ºÎ¸£±â
 
-		for( int j = 0; j < GAMEMGR->GetTerrain()->m_iVertexCnt; j++ )
+		for( int j = 0; j < GAMEMGR->GetTerrain()->GetVertexCnt(); j++ )
 		{
-			for( int i = 0; i < GAMEMGR->GetTerrain()->m_iVertexCnt; i++ )
+			for( int i = 0; i < GAMEMGR->GetTerrain()->GetVertexCnt(); i++ )
 			{
-				int iPos = j *  GAMEMGR->GetTerrain()->m_iVertexCnt + i;
+				int iPos = j *  GAMEMGR->GetTerrain()->GetVertexCnt() + i;
 				float _fx,_fy,_fz;
 				CString _strx,_stry,_strz;
 				fscanf(p," %s",_strx);
 				_fx = _ttoi(_strx);
-				GAMEMGR->GetTerrain()->m_pTerrainVB[iPos].vPos.x = _fx;
+				auto pTerrainVB = GAMEMGR->GetTerrain()->GetTerrainVB();
+
+				pTerrainVB[iPos].vPos.x = _fx;
 				fscanf(p," %s",_stry);
 				_fy = _ttoi(_stry);
-				GAMEMGR->GetTerrain()->m_pTerrainVB[iPos].vPos.y = _fy;
+				pTerrainVB[iPos].vPos.y = _fy;
 				fscanf(p," %s",_strz);
 				_fz = _ttoi(_strz);
-				GAMEMGR->GetTerrain()->m_pTerrainVB[iPos].vPos.z = _fz;
+				pTerrainVB[iPos].vPos.z = _fz;
 			}
 		}
 		GAMEMGR->GetTerrain()->LockVB();

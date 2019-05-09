@@ -18,6 +18,20 @@ typedef void (*GetIndexFunc)(QuadNode* pNode, QTINFO& pData);
 class QuadNode
 {
 public:
+
+	void CreateNode(D3DFVF_XYZ_NORMAL_TEX1* _pTerrainVertex, int _coner[QT_MAX], int _MaxLev, int _currLev, QuadNode* pParent, int _vtxCnt);
+
+	void CreateChild(void);
+	bool isIn(D3DXVECTOR3 vPos, QTINFO info, GetIndexFunc pFunc, float _size);
+	void Release();
+
+	QuadNode(void);
+	QuadNode(int _vertexCnt);
+	virtual ~QuadNode(void);
+
+	int GetCorner(int nIndex) { return m_iCorner[nIndex]; }
+	int* GetCorner() { return m_iCorner; }
+private:
 	int						m_iCorner[QT_MAX];
 	int						m_iLevel;				//쿼드노드 레벨
 	int						m_iMaxLevel;			//최대 레벨
@@ -30,16 +44,4 @@ public:
 	D3DFVF_XYZ_NORMAL_TEX1*	m_pTerrainVertex;
 
 	float					m_fSize;
-
-public:
-
-	void CreateNode(D3DFVF_XYZ_NORMAL_TEX1* _pTerrainVertex, int _coner[QT_MAX], int _MaxLev, int _currLev, QuadNode* pParent, int _vtxCnt);
-
-	void CreateChild(void);
-	bool isIn(D3DXVECTOR3 vPos, QTINFO info, GetIndexFunc pFunc, float _size);
-	void Release();
-
-	QuadNode(void);
-	QuadNode(int _vertexCnt);
-	~QuadNode(void);
 };

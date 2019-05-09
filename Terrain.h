@@ -5,21 +5,7 @@ class QuadTree;
 class QuadNode;
 class Terrain
 {
-public:
-	int							m_iPatchCnt;
-	int							m_iVertexCnt;
-	int							m_iTotalVertexCnt;
-	int							m_iTotalFaceCnt;
-
-	int							g_TerrUpDown;
-
-	LPDIRECT3DVERTEXBUFFER9		m_pVB;
-	LPDIRECT3DINDEXBUFFER9		m_pIB;
-	LPDIRECT3DTEXTURE9			m_pTexture;
-
-	D3DFVF_XYZ_NORMAL_TEX1*		m_pTerrainVB;
-	D3DINDEX*					m_pTerrainIB;
-	
+public:	
 	void Init(int _patchCnt,char* _name);
 	void InitVB(void);
 	void InitIB(void);
@@ -28,23 +14,13 @@ public:
 	void Release(void);
 
 	float GetPlayerHeight(D3DXVECTOR3 _vPos);
-	void TerrainUp(float dTime);
+	void TerrainUpDown(float dTime, bool bUP);
 
-public:
-	QuadTree*					m_pQuadTree;
-	int							m_iQTTotalFaceCnt;
-	LPDIRECT3DINDEXBUFFER9		m_pQTIB;
-	D3DINDEX*					m_pQTTerrainIB;
-
+public:	
 	void QuadTreeCreate(int _lev);
 	void QuadCulling(D3DXVECTOR3 _vPos);
-	QTINFO						m_pInfo;
-
+	
 	static void SetQTIndex(QuadNode* pNode, QTINFO& data);
-
-	int						m_ieditMode;
-	float					g_fQuadSize;
-
 	void setUpDown(bool _TerrUpDown);
 
 public:
@@ -52,23 +28,58 @@ public:
 	void UpdateCircle(void);
 	void RenderCircle(void);
 	void ReleaseCircle();
-	
-	int m_iCircleCnt;
-	LPDIRECT3DVERTEXBUFFER9			m_pCircleVB;
-	bool Collison( D3DXVECTOR3 _vPos);
-	D3DXVECTOR3		m_vMouse;
+		
+	bool Collison( D3DXVECTOR3 _vPos);	
 	void LockVB();
-public:
-	LPDIRECT3DTEXTURE9			m_pSplatTexture;
-	LPDIRECT3DTEXTURE9			m_pAlphaTexture;
-	int							m_iAlphaSize;
+	
 	void CreateAlphaTexture(void);
 	void RenderAlphaTexture(void);
 	void UpdateAlphaTexture(void);
 
 	void SetSize(int _size){m_iPatchCnt			= _size;
 							m_iVertexCnt		= _size + 1;}
+
+	void	SeteditMode(int neditMode) { m_ieditMode = neditMode; }
+	void	SetQuadSize(float fQuadSize) { m_fQuadSize = fQuadSize; }
+
+	D3DXVECTOR3 GetvMouse() const { return m_vMouse; }
+	int GetVertexCnt() const {return m_iVertexCnt;}
+	D3DFVF_XYZ_NORMAL_TEX1* GetTerrainVB() const { return  m_pTerrainVB; }
+
 public:
 	Terrain(void);
 	virtual ~Terrain(void);
+
+private:
+	int							m_iPatchCnt;
+	int							m_iVertexCnt;
+	int							m_iTotalVertexCnt;
+	int							m_iTotalFaceCnt;
+	int							m_iQTTotalFaceCnt;
+	int							m_TerrUpDown;
+	int							m_iAlphaSize;
+	int							m_iCircleCnt;
+	int							m_ieditMode;
+	float						m_fQuadSize;
+
+	LPDIRECT3DVERTEXBUFFER9		m_pVB;
+	LPDIRECT3DINDEXBUFFER9		m_pIB;
+	LPDIRECT3DTEXTURE9			m_pTexture;
+
+	D3DFVF_XYZ_NORMAL_TEX1*		m_pTerrainVB;
+	D3DINDEX*					m_pTerrainIB;
+
+	LPDIRECT3DTEXTURE9			m_pSplatTexture;
+	LPDIRECT3DTEXTURE9			m_pAlphaTexture;
+	
+	D3DXVECTOR3					m_vMouse;
+	
+	LPDIRECT3DVERTEXBUFFER9		m_pCircleVB;
+	QuadTree*					m_pQuadTree;
+	LPDIRECT3DINDEXBUFFER9		m_pQTIB;
+	D3DINDEX*					m_pQTTerrainIB;
+	QTINFO						m_pInfo;
+	
+
 };
+

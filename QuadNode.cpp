@@ -6,17 +6,16 @@
 int QuadNode::m_iVertexCnt = 0;
 
 QuadNode::QuadNode(void)
+:m_iLevel(-1),
+m_iMaxLevel(0),
+m_pParentNode(NULL),
+m_pTerrainVertex(NULL)
 {
 	for(int i=0; i<QT_MAX; i++)
 		m_iCorner[i]	= -1;
-	m_iLevel			= -1;			
-	m_iMaxLevel			=0;		
-
-	m_pParentNode		=NULL;
+	
 	for(int i=0; i<4; i++)
 		m_pChildNodeList[i] = NULL;
-
-	m_pTerrainVertex = NULL;
 
 }
 
